@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/altar.wav-2d4d0066fe0a5825d7cfde4d21ba3f15.sample"
+
+[deps]
+
+source_file="res://sfx/altar.wav"
+dest_files=[ "res://.import/altar.wav-2d4d0066fe0a5825d7cfde4d21ba3f15.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop=false
+compress/mode=0

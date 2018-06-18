@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bullet_hit_robot.wav-8a616c699cec7f22d6b849da70676ebf.sample"
+
+[deps]
+
+source_file="res://sfx/bullet_hit_robot.wav"
+dest_files=[ "res://.import/bullet_hit_robot.wav-8a616c699cec7f22d6b849da70676ebf.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bulletstarts_LiamG_SFX_CC0_freesound.wav-f8b0b76d70fb63086b3b992992a39053.sample"
+
+[deps]
+
+source_file="res://sfx/bulletstarts_LiamG_SFX_CC0_freesound.wav"
+dest_files=[ "res://.import/bulletstarts_LiamG_SFX_CC0_freesound.wav-f8b0b76d70fb63086b3b992992a39053.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

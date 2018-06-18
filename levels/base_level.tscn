@@ -1,0 +1,309 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://levels/base_level.gd" type="Script" id=1]
+[ext_resource path="res://tileset/tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://levels/navigation.gd" type="Script" id=3]
+[ext_resource path="res://tileset/nav_tilese.tres" type="TileSet" id=4]
+[ext_resource path="res://tileset/navtiles.gd" type="Script" id=5]
+[ext_resource path="res://levels/autospawn.gd" type="Script" id=6]
+[ext_resource path="res://tileset/shadows.tres" type="TileSet" id=7]
+[ext_resource path="res://tileset/shadows.gd" type="Script" id=8]
+[ext_resource path="res://levels/spawn_area.gd" type="Script" id=9]
+[ext_resource path="res://levels/position_type.tscn" type="PackedScene" id=10]
+[ext_resource path="res://player/player.tscn" type="PackedScene" id=11]
+[ext_resource path="res://levels/leave_level.tscn" type="PackedScene" id=12]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 32, 31 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 1360, 200 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 200, 940 )
+
+[node name="base_level" type="Node2D" index="0"]
+
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="floor" type="TileMap" parent="." index="0"]
+
+z_index = -2
+mode = 0
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 16, 16 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = true
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray(  )
+_sections_unfolded = [ "Cell", "Transform", "Z Index" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="navigation" type="Navigation2D" parent="." index="1"]
+
+editor/display_folded = true
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="navtiles" type="TileMap" parent="navigation" index="0"]
+
+visible = false
+mode = 0
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 16, 16 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray(  )
+script = ExtResource( 5 )
+_sections_unfolded = [ "Cell" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="walls" type="TileMap" parent="." index="2"]
+
+editor/display_folded = true
+mode = 0
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 16, 16 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 2
+cell_y_sort = true
+cell_clip_uv = false
+collision_use_kinematic = true
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1025
+collision_mask = 1025
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray(  )
+script = ExtResource( 6 )
+_sections_unfolded = [ "Cell", "Collision" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="shadows" type="TileMap" parent="walls" index="0"]
+
+mode = 0
+tile_set = ExtResource( 7 )
+cell_size = Vector2( 16, 16 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray(  )
+script = ExtResource( 8 )
+_sections_unfolded = [ "Cell" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="spawn_area_1" type="Area2D" parent="walls" index="1"]
+
+editor/display_folded = true
+position = Vector2( 555, 247 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 0
+collision_mask = 2
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 9 )
+_sections_unfolded = [ "Collision" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/spawn_area_1" index="0"]
+
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="position_type" parent="walls/spawn_area_1" index="1" instance=ExtResource( 10 )]
+
+position = Vector2( 89, -69 )
+
+[node name="position_type2" parent="walls/spawn_area_1" index="2" instance=ExtResource( 10 )]
+
+position = Vector2( -24, 66 )
+type = 1
+
+[node name="respawn_timer" type="Timer" parent="walls/spawn_area_1" index="3"]
+
+process_mode = 1
+wait_time = 0.5
+one_shot = true
+autostart = false
+
+[node name="player" parent="walls" index="2" instance=ExtResource( 11 )]
+
+position = Vector2( 89, 294 )
+
+[node name="level_limits" type="Node2D" parent="." index="3"]
+
+editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="top_left" type="Position2D" parent="level_limits" index="0"]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="bottom_right" type="Position2D" parent="level_limits" index="1"]
+
+position = Vector2( 1920, 1048 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="level_borders" type="StaticBody2D" parent="." index="4"]
+
+editor/display_folded = true
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="top" type="CollisionShape2D" parent="level_borders" index="0"]
+
+position = Vector2( 960, -232 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="bottom" type="CollisionShape2D" parent="level_borders" index="1"]
+
+position = Vector2( 960, 1312 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="left" type="CollisionShape2D" parent="level_borders" index="2"]
+
+position = Vector2( -232, 540 )
+shape = SubResource( 3 )
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="right" type="CollisionShape2D" parent="level_borders" index="3"]
+
+position = Vector2( 2152, 540 )
+shape = SubResource( 3 )
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="leave_level_1" parent="." index="5" instance=ExtResource( 12 )]
+
+editor/display_folded = true
+position = Vector2( 173, 396 )
+active = false
+LeaveTo = "res://levels/base_level.tscn"
+
+[node name="restart_pos" type="Position2D" parent="leave_level_1" index="1"]
+
+position = Vector2( 0, 35 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="leave_level_2" parent="." index="6" instance=ExtResource( 12 )]
+
+editor/display_folded = true
+position = Vector2( 398, -16 )
+LeaveTo = "res://levels/base_level.tscn"
+StartNode = "leave_level_3"
+
+[node name="restart_pos" type="Position2D" parent="leave_level_2" index="1"]
+
+position = Vector2( 0, 35 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="leave_level_3" parent="." index="7" instance=ExtResource( 12 )]
+
+editor/display_folded = true
+position = Vector2( 366, 1091 )
+LeaveTo = "res://levels/base_level.tscn"
+StartNode = "leave_level_2"
+
+[node name="restart_pos" type="Position2D" parent="leave_level_3" index="1"]
+
+position = Vector2( 0, -44 )
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="body_entered" from="walls/spawn_area_1" to="walls/spawn_area_1" method="_on_spawn_area_body_entered"]
+
+[connection signal="timeout" from="walls/spawn_area_1/respawn_timer" to="walls/spawn_area_1" method="_on_respawn_timer_timeout"]
+
+

@@ -1,0 +1,380 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://main.gd" type="Script" id=1]
+[ext_resource path="res://hud/hud_text.tscn" type="PackedScene" id=2]
+[ext_resource path="res://hud/tinyfont.fnt" type="BitmapFont" id=3]
+[ext_resource path="res://hud/tiny_skull.png" type="Texture" id=4]
+[ext_resource path="res://hud/bonus_counter.gd" type="Script" id=5]
+[ext_resource path="res://music/music.ogg" type="AudioStream" id=6]
+[ext_resource path="res://sfx/MultiAudioStreamPlayer.tscn" type="PackedScene" id=7]
+[ext_resource path="res://sfx/bulletstarts_LiamG_SFX_CC0_freesound.wav" type="AudioStream" id=8]
+
+[sub_resource type="Animation" id=1]
+
+length = 0.3
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("trans_poly:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+
+length = 0.3
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("trans_poly:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+
+resource_name = "pause"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("levels:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.473185, 0.468018, 0.5625, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+
+resource_name = "unpause"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("levels:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.473185, 0.468018, 0.5625, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="main" type="Node2D" index="0"]
+
+pause_mode = 2
+script = ExtResource( 1 )
+_sections_unfolded = [ "Pause" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="levels" type="Node2D" parent="." index="0"]
+
+pause_mode = 1
+modulate = Color( 0.473185, 0.468018, 0.5625, 1 )
+_sections_unfolded = [ "Pause", "Visibility" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="hud_layer" type="CanvasLayer" parent="." index="1"]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="hud" type="Node2D" parent="hud_layer" index="0"]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="energy_back" type="Polygon2D" parent="hud_layer/hud" index="0"]
+
+editor/display_folded = true
+polygon = PoolVector2Array( 4, 4, 54, 4, 54, 8, 4, 8 )
+uv = PoolVector2Array(  )
+color = Color( 0, 0, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="energy" type="Polygon2D" parent="hud_layer/hud/energy_back" index="0"]
+
+polygon = PoolVector2Array( 4, 4, 54, 4, 54, 8, 4, 8 )
+uv = PoolVector2Array(  )
+color = Color( 0.0813293, 0.800781, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="fireshield_back" type="Polygon2D" parent="hud_layer/hud" index="1"]
+
+editor/display_folded = true
+visible = false
+position = Vector2( 0, 6 )
+polygon = PoolVector2Array( 4, 4, 54, 4, 54, 8, 4, 8 )
+uv = PoolVector2Array(  )
+color = Color( 0, 0, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="fireshield" type="Polygon2D" parent="hud_layer/hud/fireshield_back" index="0"]
+
+polygon = PoolVector2Array( 4, 4, 54, 4, 54, 8, 4, 8 )
+uv = PoolVector2Array(  )
+color = Color( 0.910156, 0, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="iceshield_back" type="Polygon2D" parent="hud_layer/hud" index="2"]
+
+editor/display_folded = true
+visible = false
+position = Vector2( 0, 12 )
+polygon = PoolVector2Array( 4, 4, 54, 4, 54, 8, 4, 8 )
+uv = PoolVector2Array(  )
+color = Color( 0, 0, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="iceshield" type="Polygon2D" parent="hud_layer/hud/iceshield_back" index="0"]
+
+polygon = PoolVector2Array( 4, 4, 54, 4, 54, 8, 4, 8 )
+uv = PoolVector2Array(  )
+color = Color( 0, 0.742188, 1, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="hud_text" parent="hud_layer/hud" index="3" instance=ExtResource( 2 )]
+
+[node name="timer" type="Label" parent="hud_layer/hud" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 454.0
+margin_top = 6.0
+margin_right = 494.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 3 )
+text = "00:00"
+uppercase = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="deathcount" type="Label" parent="hud_layer/hud" index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 454.0
+margin_top = 18.0
+margin_right = 478.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 3 )
+text = "0"
+uppercase = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="tiny_skull" type="Sprite" parent="hud_layer/hud/deathcount" index="0"]
+
+position = Vector2( -9, 4 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="bonus_counter" type="Node2D" parent="hud_layer/hud" index="6"]
+
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Position2D" type="Position2D" parent="hud_layer/hud/bonus_counter" index="0"]
+
+position = Vector2( 78, 69 )
+
+[node name="Position2D2" type="Position2D" parent="hud_layer/hud/bonus_counter" index="1"]
+
+position = Vector2( 363, 173 )
+
+[node name="transition_layer" type="CanvasLayer" parent="." index="2"]
+
+layer = 2
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="trans_poly" type="Polygon2D" parent="transition_layer" index="0"]
+
+modulate = Color( 1, 1, 1, 0 )
+polygon = PoolVector2Array( -16, -16, 496, -16, 496, 288, -16, 288 )
+uv = PoolVector2Array(  )
+color = Color( 0, 0, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+_sections_unfolded = [ "Visibility" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="anim" type="AnimationPlayer" parent="transition_layer" index="1"]
+
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/fade_in = SubResource( 1 )
+anims/fade_out = SubResource( 2 )
+blend_times = [  ]
+
+[node name="loadtimer" type="Timer" parent="." index="3"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
+
+[node name="levels_pause" type="AnimationPlayer" parent="." index="4"]
+
+root_node = NodePath("..")
+autoplay = "unpause"
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/pause = SubResource( 3 )
+anims/unpause = SubResource( 4 )
+blend_times = [  ]
+
+[node name="music" type="AudioStreamPlayer" parent="." index="5"]
+
+stream = ExtResource( 6 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = true
+mix_target = 0
+bus = "music"
+
+[node name="sfx" parent="." index="6" instance=ExtResource( 7 )]
+
+stream = ExtResource( 8 )
+
+[connection signal="text_finished" from="hud_layer/hud/hud_text" to="." method="_on_hud_text_text_finished"]
+
+[connection signal="timeout" from="loadtimer" to="." method="_on_loadtimer_timeout"]
+
+
